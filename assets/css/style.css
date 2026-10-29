@@ -89,16 +89,16 @@ a:hover { color: var(--accent-dark); }
 
 /* Decorative band – traditional Bhutanese painted frieze (clouds and pearls) */
 .textile-band {
-  /* Pattern drawn at 36px and trimmed from the top to a 32px band, keeping the pearls whole */
-  height: 32px;
+  /* Whole pattern scaled down to a 25px band (30% thinner) so the clouds stay visible */
+  height: 25px;
   background: #A9442F url("../images/border-frieze.jpg") repeat-x left bottom;
-  background-size: auto 36px;
+  background-size: auto 25px;
 }
 
 /* Woven pattern used along the top of the footer */
 .textile-band--weave {
-  /* Pattern drawn at 44px and trimmed top and bottom to a 40px band */
-  height: 40px;
+  /* Pattern drawn at 44px and trimmed top and bottom to a 31px band (30% thinner) */
+  height: 31px;
   background: #C4553A url("../images/border-weave.jpg") repeat-x left center;
   background-size: auto 44px;
 }

@@ -89,9 +89,9 @@ a:hover { color: var(--accent-dark); }
 
 /* Decorative band – traditional Bhutanese painted frieze (clouds and pearls) */
 .textile-band {
-  height: 30px;
-  background: #A9442F url("../images/border-frieze.svg") repeat-x left center;
-  background-size: auto 30px;
+  height: 36px;
+  background: #A9442F url("../images/border-frieze.jpg") repeat-x left center;
+  background-size: auto 36px;
 }
 
 /* Header */

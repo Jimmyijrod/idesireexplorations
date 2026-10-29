@@ -96,9 +96,9 @@ a:hover { color: var(--accent-dark); }
 
 /* Woven pattern used along the top of the footer */
 .textile-band--weave {
-  height: 44px;
+  height: 40px;
   background: #C4553A url("../images/border-weave.jpg") repeat-x left center;
-  background-size: auto 44px;
+  background-size: auto 40px;
 }
 
 /* Header */

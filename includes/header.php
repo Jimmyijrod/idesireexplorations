@@ -17,7 +17,7 @@ $heroHeader = $heroHeader ?? false;
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&family=Nunito+Sans:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=<?= filemtime(__DIR__ . '/../assets/css/style.css') ?>">
 </head>
 <body>
 <header class="site-header<?= $heroHeader ? ' site-header--over-hero' : '' ?>">

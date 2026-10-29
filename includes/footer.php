@@ -1,6 +1,6 @@
 <?php require_once __DIR__ . '/config.php'; ?>
 <footer class="site-footer">
-  <div class="textile-band" aria-hidden="true"></div>
+  <div class="textile-band textile-band--weave" aria-hidden="true"></div>
   <div class="container site-footer__inner">
     <div class="site-footer__brand">
       <p class="site-footer__name"><?= e(SITE_NAME) ?></p>

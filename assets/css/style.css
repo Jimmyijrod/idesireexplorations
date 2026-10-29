@@ -94,6 +94,13 @@ a:hover { color: var(--accent-dark); }
   background-size: auto 36px;
 }
 
+/* Woven pattern used along the top of the footer */
+.textile-band--weave {
+  height: 44px;
+  background: #C4553A url("../images/border-weave.jpg") repeat-x left center;
+  background-size: auto 44px;
+}
+
 /* Header */
 .site-header { background: var(--hero); position: relative; z-index: 10; }
 .site-header--over-hero { position: absolute; top: 0; left: 0; right: 0; background: transparent; }

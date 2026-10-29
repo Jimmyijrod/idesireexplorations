@@ -1,0 +1,6 @@
+---
+# cPanel "Deploy HEAD Commit" copies the website files into public_html.
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/idesireexplorati/public_html/
+    - /bin/cp -R index.php includes assets $DEPLOYPATH

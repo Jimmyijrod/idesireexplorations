@@ -1,6 +1,7 @@
 ---
-# cPanel "Deploy HEAD Commit" copies the website files into public_html.
+# cPanel "Deploy HEAD Commit" copies the website files into public_html/preview (test folder).
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/idesireexplorati/public_html/
+    - export DEPLOYPATH=/home/idesireexplorati/public_html/preview/
+    - /bin/mkdir -p $DEPLOYPATH
     - /bin/cp -R index.php includes assets $DEPLOYPATH

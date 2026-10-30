@@ -3,7 +3,8 @@
 // $heroHeader = true draws the menu on top of the hero photo (home page).
 require_once __DIR__ . '/config.php';
 
-$pageTitle  = $pageTitle ?? SITE_NAME;
+$siteName   = setting('site_name', 'iDesire Explorations');
+$pageTitle  = $pageTitle ?? $siteName;
 $heroHeader = $heroHeader ?? false;
 ?>
 <!doctype html>
@@ -12,7 +13,7 @@ $heroHeader = $heroHeader ?? false;
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?= e($pageTitle) ?></title>
-  <meta name="description" content="<?= e(SITE_NAME . ' – ' . SITE_TAGLINE) ?>">
+  <meta name="description" content="<?= e($siteName . ' – ' . setting('tagline')) ?>">
   <link rel="icon" href="assets/images/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +24,7 @@ $heroHeader = $heroHeader ?? false;
 <header class="site-header<?= $heroHeader ? ' site-header--over-hero' : '' ?>">
   <div class="container site-header__inner">
     <a href="index.php" class="site-header__logo">
-      <img src="assets/images/logo.png" alt="<?= e(SITE_NAME) ?> home" width="68" height="68">
+      <img src="assets/images/logo.png" alt="<?= e($siteName) ?> home" width="68" height="68">
     </a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu">
       <span></span><span></span><span></span>

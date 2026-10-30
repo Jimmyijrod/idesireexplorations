@@ -1,20 +1,38 @@
 <?php
-$pageTitle  = 'iDesire Explorations – Tours, treks and festivals in Bhutan';
+require_once __DIR__ . '/includes/config.php';
+
+try {
+    $featuredTours = featured_tours(3);
+    $categories    = tour_categories();
+} catch (Throwable $error) {
+    fail_gracefully($error);
+}
+
+$pageTitle  = setting('site_name') . ' – ' . setting('tagline');
 $heroHeader = true;
-require __DIR__ . '/includes/data.php';
+$heroImage  = setting('hero_image');
+$heroVideo  = setting('hero_video');
+$months     = ['January', 'February', 'March', 'April', 'May', 'June',
+               'July', 'August', 'September', 'October', 'November', 'December'];
+
 require __DIR__ . '/includes/header.php';
 ?>
 
 <main>
-  <!-- Hero: replace the placeholder with a photo or video later -->
   <section class="hero">
-    <div class="hero__media" aria-hidden="true">
-      <span class="placeholder-label">Full-screen photo or video · prayer flags at Dochula</span>
+    <div class="hero__media"<?= $heroImage || $heroVideo ? '' : ' aria-hidden="true"' ?>>
+      <?php if ($heroVideo): ?>
+        <video src="<?= e($heroVideo) ?>" autoplay muted loop playsinline<?= $heroImage ? ' poster="' . e($heroImage) . '"' : '' ?>></video>
+      <?php elseif ($heroImage): ?>
+        <img src="<?= e($heroImage) ?>" alt="<?= e(setting('hero_alt')) ?>">
+      <?php else: ?>
+        <span class="placeholder-label">Full-screen photo or video · <?= e(setting('hero_alt')) ?></span>
+      <?php endif; ?>
     </div>
     <div class="container hero__content">
-      <p class="eyebrow">Kuzuzangpo la · Welcome</p>
-      <h1>Travel Bhutan the way it is lived</h1>
-      <p class="hero__lead">Monasteries, mountain trails and village festivals, with guides who call this place home.</p>
+      <p class="eyebrow"><?= e(setting('hero_eyebrow')) ?></p>
+      <h1><?= e(setting('hero_title')) ?></h1>
+      <p class="hero__lead"><?= e(setting('hero_text')) ?></p>
     </div>
   </section>
 
@@ -26,16 +44,16 @@ require __DIR__ . '/includes/header.php';
       <label>Type of trip
         <select name="type">
           <option value="">Any</option>
-          <option value="cultural">Cultural tour</option>
-          <option value="trek">Trek</option>
-          <option value="festival">Festival</option>
+          <?php foreach ($categories as $category): ?>
+            <option value="<?= e($category['slug']) ?>"><?= e($category['name']) ?></option>
+          <?php endforeach; ?>
         </select>
       </label>
       <label>Month
         <select name="month">
           <option value="">Any month</option>
-          <?php foreach (['January','February','March','April','May','June','July','August','September','October','November','December'] as $m): ?>
-            <option value="<?= strtolower($m) ?>"><?= $m ?></option>
+          <?php foreach ($months as $i => $month): ?>
+            <option value="<?= $i + 1 ?>"><?= $month ?></option>
           <?php endforeach; ?>
         </select>
       </label>
@@ -54,30 +72,34 @@ require __DIR__ . '/includes/header.php';
   <!-- Journeys -->
   <section class="container section">
     <h2 class="section__title">Our journeys</h2>
-    <div class="tour-grid">
-      <?php foreach ($featuredTours as $tour): ?>
-        <a class="tour-card" href="tour.php?slug=<?= e($tour['slug']) ?>">
-          <?php if ($tour['image']): ?>
-            <img class="tour-card__img" src="<?= e($tour['image']) ?>" alt="" loading="lazy">
-          <?php else: ?>
-            <span class="placeholder-label">Photo · <?= e($tour['photo']) ?></span>
-          <?php endif; ?>
-          <div class="tour-card__info">
-            <p class="tour-card__days"><?= e($tour['days']) ?></p>
-            <h3><?= e($tour['name']) ?></h3>
-            <p class="tour-card__price">From <?= e($tour['price']) ?> →</p>
-          </div>
-        </a>
-      <?php endforeach; ?>
-    </div>
+    <?php if ($featuredTours): ?>
+      <div class="tour-grid">
+        <?php foreach ($featuredTours as $tour): ?>
+          <a class="tour-card" href="tour.php?slug=<?= e($tour['slug']) ?>">
+            <?php if ($tour['cover_image']): ?>
+              <img class="tour-card__img" src="<?= e($tour['cover_image']) ?>" alt="<?= e($tour['cover_alt']) ?>" loading="lazy">
+            <?php else: ?>
+              <span class="placeholder-label">Photo · <?= e($tour['cover_alt']) ?></span>
+            <?php endif; ?>
+            <div class="tour-card__info">
+              <p class="tour-card__days"><?= e(tour_meta($tour)) ?></p>
+              <h3><?= e($tour['name']) ?></h3>
+              <p class="tour-card__price"><?= e(tour_price($tour)) ?> →</p>
+            </div>
+          </a>
+        <?php endforeach; ?>
+      </div>
+    <?php else: ?>
+      <p class="empty-note">New journeys are coming soon. <a href="enquiry.php">Ask us</a> about a trip.</p>
+    <?php endif; ?>
   </section>
 
   <!-- About intro -->
   <section class="intro">
     <div class="container container--text">
       <img src="assets/images/logo.png" alt="" width="72" height="72">
-      <h2>A small team with a big love for Bhutan</h2>
-      <p>[Two or three sentences about iDesire Explorations: who you are, why you started, and how you look after your guests.]</p>
+      <h2><?= e(setting('about_title')) ?></h2>
+      <p><?= nl2br(e(setting('about_text'))) ?></p>
       <a href="about.php" class="link">Read our story</a>
     </div>
   </section>

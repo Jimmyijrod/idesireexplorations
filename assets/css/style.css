@@ -266,3 +266,6 @@ a:hover { color: var(--accent-dark); }
   .tour-grid { grid-template-columns: 1fr; }
   .tour-card { height: 380px; }
 }
+
+/* Shown when a list has nothing to display yet */
+.empty-note { text-align: center; color: var(--muted); }
